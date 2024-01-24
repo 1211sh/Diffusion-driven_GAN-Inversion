@@ -1,1 +1,1 @@
-# Diffusion-driven_GAN-Inversion
+# Diffusion-driven GAN Inversion for Multi-Modal Face Image Generation
