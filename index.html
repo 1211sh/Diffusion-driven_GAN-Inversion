@@ -118,7 +118,7 @@
 
 <html>
 <head>
-	<title>InstaFormer</title>
+	<title>Diffusion-driven GAN Inversion for Multi-Modal Face Image Generation</title>
 	<meta property="og:image" content="https://KU-CVLAB.github.io/InstaFormer/resources/instaformer_arch_a.png"/>
 	<meta property="og:title" content="InstaFormer: Instance-aware Image-to-Image Translation with Transformer" />
 </head>
@@ -126,33 +126,33 @@
 <body>
 	<br>
 	<center>
-		<span style="font-size:36px">InstaFormer: Instance-aware Image-to-Image Translation with Transformer<br>CVPR'22</span>
+		<span style="font-size:36px">Diffusion-driven GAN Inversion for Multi-Modal Face Image Generation<br>arxiv'24</span>
 		<table align=center width=1100px>
 			<table align=center width=1100px>
 				<tr>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href="https://1211sh.github.io/">Soohyun Kim<sup>1</sup></a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?hl=en&user=EyHyvWEAAAAJ">Jihyun Kim<sup>1</sup></a></span>
 						</center>
 					</td>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href="https://github.com/jongbeombaek">Jongbeom Baek<sup>1</sup></a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.co.kr/citations?user=wQVWb98AAAAJ&hl=ko">Changjae Oh<sup>1</sup></a></span>
 						</center>
 					</td>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href="https://scholar.google.co.kr/citations?hl=ko&user=Fg0DBKwAAAAJ">Jihye Park<sup>1</sup></a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.co.kr/citations?user=52vpqpcAAAAJ&hl=ko">Hoseok Do<sup>1</sup></a></span>
 						</center>
 					</td>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=wRzJDh8AAAAJ&hl=ko&oi=sra">Gyeongnyeon Kim<sup>1</sup></a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=oDplwx8AAAAJ&hl=ko&oi=sra">Soohyun Kim<sup>1</sup></a></span>
 						</center>
 					</td>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px"><a href="https://seungryong.github.io/">Seungryong Kim<sup>1</sup></a></span>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=zEtk0QsAAAAJ&hl=en">Kwanghoon Sohn<sup>1</sup></a></span>
 						</center>
 					</td>
 				</tr>
@@ -162,7 +162,7 @@
 				<tr>
 					<td align=center width=150px>
 						<center>
-							<span style="font-size:24px">Korea University<sup>1</sup></a></span>
+							<span style="font-size:24px">LG Electronics<sup>1</sup></a></span>
 						</center>
 					</td>
 
@@ -213,26 +213,26 @@
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				We present a novel Transformer-based network architecture for instance-aware image-to-image translation, dubbed InstaFormer, to effectively integrate global- and instance-level information. 
-				By considering extracted content features from an image as tokens, our networks discover global consensus of content features by considering context information through a self-attention module in Transformers. 
-				By augmenting such tokens with an instance-level feature extracted from the content feature with respect to bounding box information, 
-				our framework is capable of learning an interaction between object instances and the global image, thus boosting the instance-awareness. 
-				We replace layer normalization (LayerNorm) in standard Transformers with adaptive instance normalization (AdaIN) to enable a multi-modal translation with style codes. 
-				In addition, to improve the instance-awareness and translation quality at object regions, we present an instance-level content contrastive loss defined between input and translated image. 
-				We conduct experiments to demonstrate the effectiveness of our InstaFormer over the latest methods and provide extensive ablation studies.
+				We present a new multi-modal face image generation method that translates a text prompt and a visual condition into a high-fidelity and photo-realistic facial image. 
+				We employ a diffusion model as an encoder to map the multi-modal inputs into the latent space of the pre-trained 2D or 3D GANs. 
+				To establish the link between the diffusion-based encoder and pre-trained GANs, we present a mapping network and a style modulation network based on cross-attention maps that encode the features of facial attributes in a diffusion model into the latent codes and adjust their values to adapt to GANs. 
+				We further present a multi-step training strategy that reflects textual and structural representations into the generated image. 
+				With GAN inversion, we can then estimate latent codes and generate 2D or multi-view facial images. 
+				By leveraging the diffusion-based encoder with our mapping and modulation networks, our model has large capabilities to predict facial attributes and generate photo-realistic outputs. 
+				We validate our method by using pre-trained 2D and 3D GANs, and our results outperform existing methods.
 			</td>
 		</tr>
 	</table>
 	<br>
 	<hr>
 
-	<center><h1> Overall Architecture for InstaFormer </h1></center>
+	<center><h1> Overview of our method.  </h1></center>
 	
 	<table align=center width=600px>
 		<tr>
 			<td align=center width=600px>
 				<center>
-					<td><img class="round" style="width:800px" src="./resources/instaformer_arch_a.png"/></td>
+					<td><img class="round" style="width:800px" src="./resources/fig_overview_5-1.png"/></td>
 				</center>
 			</td>
 		</tr>
@@ -241,7 +241,7 @@
 		<center>
 			<tr>
 				<td>
-					Our networks consist of content encoder, Transformer encoder, and generator. The gray background represents the test phase, where we have no access on object instance bounding box.
+					We use the mapping network, a diffusion-based encoder, the middle and decoder blocks of a denoising U-Net, that extracts the semantic features, intermediate features, and cross-attention maps.
 				</td>
 			</tr>
 		</center>
@@ -249,13 +249,13 @@
 	<br>
 	<hr>
 
-	<center><h1> ViT Encoder Block </h1></center>
+	<center><h1> Visual examples. </h1></center>
 	
 	<table align=center width=210px>
 		<tr>
 			<td align=center width=210px>
 				<center>
-					<td><img class="round" style="width:150px" src="./resources/vitblock.png"/></td>
+					<td><img class="round" style="width:150px" src="./resources/fig_result_editing_2d_3-1.png"/></td>
 				</center>
 			</td>
 		</tr>
@@ -264,66 +264,12 @@
 		<center>
 			<tr>
 				<td>
-					Our ViT encoder block in details: it contains AdaIN layer instead of LayerNorm.	
+					Visual examples of the 2D face image generation using a text prompt and a semantic mask.
 				</td>
 			</tr>
 		</center>
 	</table>
-	<br>
-	<hr>
-	
-	<center><h1> Qualitative Results </h1></center>
-	
-	
-	<h3> Image Translation (INIT) </h3>
-	<table align=center width=600px>
-		<tr>
-			<td align=center width=600px>
-				<center>
-					<td><img class="round" style="width:800px" src="./resources/init_qual.png"/></td>
-				</center>
-			</td>
-		</tr>
-	</table>
-	
-	<h3> Domain Adaptation (KITTI → CityScapes) </h3>
-	<table align=center width=600px>
-		<tr>
-			<td align=center width=600px>
-				<center>
-					<td><img class="round" style="width:800px" src="./resources/da.png"/></td>
-				</center>
-			</td>
-		</tr>
-	</table>
-	<br>
-	<hr>
-	
-	<table align=center width=450px>
-		<center><h1>Paper and Supplementary Material</h1></center>
-		<tr>
-			<td><a href="https://openaccess.thecvf.com/content/CVPR2022/html/Kim_InstaFormer_Instance-Aware_Image-to-Image_Translation_With_Transformer_CVPR_2022_paper.html"><img class="layered-paper-big" style="height:175px" src="./resources/paper_instaformer.png"/></a></td>
-			<td><span style="font-size:14pt">S. Kim, J. Baek, J. Park, G. Kim, S. Kim<br>
-				<b>InstaFormer: Instance-aware Image-to-Image Translation with Transformer</b>
-				<br>in CVPR, 2022.<br>
-				(hosted on <a href="https://arxiv.org/abs/2203.16248">ArXiv</a>)<br>
-				<!-- (<a href="./resources/Kim_InstaFormer_Instance-Aware_Image-to-Image_Translation_With_Transformer_CVPR_2022_paper.pdf">camera ready</a>)<br> -->
-				<span style="font-size:4pt"><a href=""><br></a>
-				</span>
-			</td>
-		</tr>
-	</table>
-	<br>
 
-	<table align=center width=600px>
-		<tr>
-			<td><span style="font-size:14pt"><center>
-				<a href="./resources/bibtex.txt">[Bibtex]</a>
-			</center></td>
-		</tr>
-	</table>
-
-	<hr>
 	<br>
 
 	<table align=center width=900px>
