@@ -162,7 +162,7 @@
 				<tr>
 					<td align=center width=130px>
 						<center>
-							<span style="font-size:20px">LG Electronics<sup>1</sup></a></span>
+							<span style="font-size:20px">AI Lab, CTO Division, LG Electronics<sup>1</sup></a></span>
 						</center>
 					</td>
 	
@@ -171,7 +171,9 @@
 							<span style="font-size:20px">Yonsei University<sup>2</sup></a></span>
 						</center>
 					</td>
-					
+				</tr>
+
+				<tr>
 					<td align=center width=100px>
 						<center>
 							<span style="font-size:20px">Queen Mary University London<sup>3</sup></a></span>
@@ -197,7 +199,7 @@
 					</td>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href='https://github.com/None'>[GitHub]</a></span><br>
+							<span style="font-size:24px"><a href='https://github.com/None'>[Code(Soon)]</a></span><br>
 						</center>
 					</td>
 				</tr>
@@ -211,7 +213,7 @@
 			<tr>
 				<td width=400px>
 					<center>
-						<img class="round" style="width:600px" src="./resources/teaser.png"/>
+						<img class="round" style="width:600px" src="./resources/fig1.png"/>
 					</center>
 				</td>
 			</tr>
@@ -231,13 +233,13 @@
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				We present a new multi-modal face image generation method that translates a text prompt and a visual condition into a high-fidelity and photo-realistic facial image. 
-				We employ a diffusion model as an encoder to map the multi-modal inputs into the latent space of the pre-trained 2D or 3D GANs. 
-				To establish the link between the diffusion-based encoder and pre-trained GANs, we present a mapping network and a style modulation network based on cross-attention maps that encode the features of facial attributes in a diffusion model into the latent codes and adjust their values to adapt to GANs. 
+				We present a new multi-modal face image generation method that converts a text prompt and a visual input, such as a semantic mask or scribble map, into a photo-realistic face image. 
+				To do this, we combine the strengths of GAN and diffusion models by employing the multi-modal features in the diffusion model into the latent space of the pre-trained GANs. 
+				We present a simple mapping network and a style modulation network to link two models and convert meaningful representations in feature maps and attention maps into latent codes. 
+				With GAN inversion, the estimated latent codes can be used to generate 2D or 3D-aware facial images. 
 				We further present a multi-step training strategy that reflects textual and structural representations into the generated image. 
-				With GAN inversion, we can then estimate latent codes and generate 2D or multi-view facial images. 
-				By leveraging the diffusion-based encoder with our mapping and modulation networks, our model has large capabilities to predict facial attributes and generate photo-realistic outputs. 
-				We validate our method by using pre-trained 2D and 3D GANs, and our results outperform existing methods.
+				By leveraging our proposed networks, realistic 2D, 3D, and stylized face images are produced, which align well with inputs. 
+				We validate our method by using pre-trained 2D and 3D GANs, and our results outperform existing methods. 
 			</td>
 		</tr>
 	</table>
@@ -264,10 +266,35 @@
 			</tr>
 		</center>
 	</table>
+
+
 	<br>
 	<hr>
 
-	<center><h1> Visual Examples </h1></center>
+	<center><h1> Quantitative results </h1></center>
+
+	<table align=center width=600px>
+		<tr>
+			<td align=center width=600px>
+				<center>
+					<td><img class="round" style="width:800px" src="./resources/cvpr2024_tab1.PNG"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					 Quantitative results of multi-modal face image generation on CelebAMask-HQ with annotated text prompts.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<br>
+	<hr>
+
+	<center><h1> Visual examples </h1></center>
 	
 	<table align=center width=210px>
 		<tr>
@@ -287,6 +314,89 @@
 			</tr>
 		</center>
 	</table>
+
+	<br>
+	<table align=center width=210px>
+		<tr>
+			<td align=center width=210px>
+				<center>
+					<td><img class="round" style="width:800px" src="./resources/fig6.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					Visual examples of the 3D-aware face image generation using a text and a semantic mask. We show the images generated with inputs and arbitrary viewpoints.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<br>
+
+	<table align=center width=210px>
+		<tr>
+			<td align=center width=210px>
+				<center>
+					<td><img class="round" style="width:500px" src="./resources/fig7.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					Visual examples of 3D-aware face image generation using text prompts and scribble maps. Using (1-4) the text prompts and their corresponding (a) scribble maps, we compare the results of (b) ControlNet with (c) multi-view images generated by ours.
+				</td>
+			</tr>
+		</center>
+	</table>
+
+	<br>
+
+	<table align=center width=210px>
+		<tr>
+			<td align=center width=210px>
+				<center>
+					<td><img class="round" style="width:600px" src="./resources/supp_fig3.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					The results of 3D face style transfer using semantic masks and style text prompts.
+			</tr>
+		</center>
+	</table>
+
+	<br>
+
+	<table align=center width=210px>
+		<tr>
+			<td align=center width=210px>
+				<center>
+					<td><img class="round" style="width:800px" src="./resources/supp_fig4.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					Results for verifying the semantic consistency. We keep the text prompts but change the components of visual inputs in Figure 5 of the main paper, such as hair, glasses, and eyes.
+			</tr>
+		</center>
+	</table>
+
 
 	<br>
 	<hr>
